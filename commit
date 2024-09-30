@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Code Scanner</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f4f4;
+        }
+        #qr-video {
+            width: 80%;
+            max-width: 400px;
+            border: 2px solid #333;
+        }
+        #result {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <video id="qr-video"></video>
+        <div id="result">Scanning result will appear here...</div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/qr-scanner/qr-scanner.min.js"></script>
+    <script>
+        const video = document.getElementById('qr-video');
+        const result = document.getElementById('result');
+
+        const qrScanner = new QrScanner(video, result => {
+            result.innerText = 'QR Code Detected: ' + result;
+            qrScanner.stop(); // Stop after scanning a QR code
+        });
+
+        qrScanner.start(); // Start scanning
+    </script>
+</body>
+</html>
